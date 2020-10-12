@@ -1,0 +1,9 @@
+ id="deleteButton{{$item->id}}" 
+
+for image resize:
+  $setImage = 'storage/'.$requestData['image'];
+        $img = Image::make($setImage)->resize(100, 100, function($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save($setImage);
+        // $img = Image::make($setImage)->resize(100, 100)->save($setImage);

@@ -1,0 +1,1 @@
+{"fields":[{"name":"project_name","type":"string"},{"name":"porject_description","type":"string"},{"name":"image","type":"file"}],"foreign_keys":[],"validations":[{"field":"project_name","rules":"required"},{"field":"porject_description","rules":"required"}],"relationships":[]}

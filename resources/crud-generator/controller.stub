@@ -1,0 +1,74 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceHttp\Requests;
+use DummyRootNamespaceHttp\Controllers\Controller;
+
+use DummyRootNamespace{{modelNamespace}}{{modelName}};
+use Illuminate\Http\Request;
+use Toastr;
+use Helpers;
+
+class DummyClass extends Controller
+{
+
+    public function index(Request $request)
+    {
+        ${{crudName}} = {{modelName}}::all();
+        return view('{{viewPath}}{{viewName}}.index', compact('{{crudName}}'));
+    }
+
+
+    public function create()
+    {
+        return view('{{viewPath}}{{viewName}}.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        {{validationRules}}
+        $requestData = $request->all();
+        {{fileSnippet}}
+        {{modelName}}::create($requestData);
+        Toastr::success('{{modelName}} added!', 'Done', ["positionClass" => "toast-top-right"]);
+        return redirect('{{routeGroup}}{{viewName}}');
+    }
+
+
+    public function show($id)
+    {
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+
+        return view('{{viewPath}}{{viewName}}.show', compact('{{crudNameSingular}}'));
+    }
+
+    public function edit($id)
+    {
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+
+        return view('{{viewPath}}{{viewName}}.edit', compact('{{crudNameSingular}}'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        {{validationRules}}
+        $requestData = $request->all();
+        {{fileSnippet}}
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+        ${{crudNameSingular}}->update($requestData);
+
+        Toastr::success('{{modelName}} updated!', 'Done', ["positionClass" => "toast-top-right"]);
+        return redirect('{{routeGroup}}{{viewName}}');
+    }
+
+
+    public function destroy($id)
+    {
+        {{modelName}}::destroy($id);
+        Toastr::success('{{modelName}} deleted!', 'Done', ["positionClass" => "toast-top-right"]);
+        return redirect('{{routeGroup}}{{viewName}}');
+    }
+}
